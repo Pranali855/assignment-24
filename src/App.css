@@ -1,0 +1,81 @@
+/* Page Background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Main Title */
+.quiz-title {
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+/* Main Container */
+.quiz-container {
+  background: white;
+  width: 400px;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Question Number */
+.question-number {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+/* Question Text */
+.question-text {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Option Cards */
+.option-item {
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  text-align: center;
+  font-weight: 500;
+}
+
+.option-item:hover {
+  background-color: #dcdcdc;
+  transform: scale(1.03);
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+/* Arrow Buttons */
+.next-button,
+.prev-button {
+  cursor: pointer;
+  color: #667eea;
+  transition: 0.3s ease;
+}
+
+.next-button:hover,
+.prev-button:hover {
+  color: #764ba2;
+  transform: scale(1.2);
+}
