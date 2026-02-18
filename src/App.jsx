@@ -1,88 +1,63 @@
-import React, { useState } from 'react';
-import './App.css';
-import data from './data';   // ✅ FIXED IMPORT
-import { ArrowBigRight, ArrowBigLeft } from 'lucide-react';
-import toast, { Toaster } from 'react-hot-toast';
-
+import React, { useState } from 'react'
+import "./App.css";
+import questions from './Data';
+import {ArrowRight } from "lucide-react";
+import toast ,{Toaster} from "react-hot-toast";
 function App() {
-
-  const startIndex = 0;
-  const endIndex = data.length - 5;
-  const randomIndex = Math.floor(Math.random() * (endIndex - startIndex + 1)) + startIndex;
-  const quizData = data.slice(randomIndex, randomIndex + 5);
-
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [optionStyle, setOptionStyle] = useState({
-    0: {},
-    1: {},
-    2: {},
-    3: {},
+  const [optionStyles, selectedOptionStyle] = useState({
+    0 :{},
+    1 :{},
+    2 :{},
+    3 :{},
+
   });
-
-  const currentQuestion = quizData[questionIndex];
-
-  const checkAnswer = (selectedOption, idx) => {
-    if (selectedOption === currentQuestion.answer) {
+  const currentQuestion = questions[questionIndex];
+  const checkAnswer =(selectedOption,idx) =>{
+    if(currentQuestion.answer=== selectedOption){
       toast.success("Correct Answer!");
-      setOptionStyle({ ...optionStyle, [idx]: { backgroundColor: "green", color: "white" } });
-    } else {
-      toast.error(`Wrong Answer! Correct: ${currentQuestion.answer}`);
-      setOptionStyle({ ...optionStyle, [idx]: { backgroundColor: "red", color: "white" } });
+      selectedOptionStyle ({...optionStyles,[idx] : {backgroundColor :"lightgreen"},
+      })
+    }else {
+      toast.error("Wrong Answer! the correct Answer is :" + currentQuestion.answer);
+      selectedOptionStyle ({...optionStyles,[idx] : {backgroundColor :"lightcoral"},
+      })
     }
   };
-
   return (
-    <>
-      <h1 className='quiz-title'>Quiz App</h1>
+    <div>
+      <h1 className='heading'>Quiz App</h1>
+      <div className='container'>
+      <p className='text-question'>Questions : {questionIndex + 1}</p>
+      <p className='txt-question'>{currentQuestion.questions}</p>
+       {currentQuestion.Option.map((Option,idx )=>{
+        return <div key={idx} className='que-option' onClick={()=>{
+        checkAnswer(Option,idx);
+        }}
+        style={optionStyles[idx]}
+        >
 
-      <div className="quiz-container">
-        <p className='question-number'>
-          Question Number: {questionIndex + 1}
-        </p>
+          {Option}</div>
+      })}
+</div>
 
-        <p className='question-text'>
-          {currentQuestion.question}
-        </p>
-
-        {currentQuestion.options.map((option, idx) => (
-          <div
-            key={idx}
-            className='option-item'
-            onClick={() => checkAnswer(option, idx)}
-            style={optionStyle[idx]}
-          >
-            {option}
-          </div>
-        ))}
-
-        <div className='navigation-buttons'>
-
-          <ArrowBigLeft
-            className='prev-button'
-            onClick={() => {
-              if (questionIndex > 0) {
-                setQuestionIndex(questionIndex - 1);
-                setOptionStyle({ 0: {}, 1: {}, 2: {}, 3: {} });
-              }
-            }}
-          />
-
-          <ArrowBigRight
-            className='next-button'
-            onClick={() => {
-              if (questionIndex < quizData.length - 1) {
-                setQuestionIndex(questionIndex + 1);
-                setOptionStyle({ 0: {}, 1: {}, 2: {}, 3: {} });
-              }
-            }}
-          />
-
-        </div>
-
-        <Toaster />
-      </div>
-    </>
-  );
+      <ArrowRight 
+      className='img-next'
+       onClick = {()=> {
+        if(questionIndex < questions .length -1){
+        setQuestionIndex (questionIndex + 1);
+        selectedOptionStyle({
+            0 :{},
+            1 :{},
+            2 :{},
+            3 :{},
+        });
+        }
+      }}
+      />
+  <Toaster />
+    </div>
+  )
 }
 
-export default App;
+export default App
